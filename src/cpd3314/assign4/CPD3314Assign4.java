@@ -21,6 +21,9 @@
  */
 package cpd3314.assign4;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -33,7 +36,7 @@ public class CPD3314Assign4 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner input = new Scanner(System.in);
         String[] questions = {
             "1. Sum of Numbers",
@@ -100,6 +103,18 @@ public class CPD3314Assign4 {
      */
     public static void doExercise1() {
         // TODO: Com[plete Exercise 1 Below
+        Scanner sc = new Scanner(System.in);
+        int i, number, sum = 0;
+        System.out.println("Enter a positive, nonzero integer value:");
+        number = sc.nextInt();
+        if (number < 0) {
+            System.out.println("Enter a positive, nonzero integer value.");
+        } else {
+            for (i = 1; i <= number; i++) {
+                sum += i;
+            }
+            System.out.println("The sum of all integers up to " + number + " is " + sum + ".");
+        }
 
     }
 
@@ -128,8 +143,34 @@ public class CPD3314Assign4 {
      * Input Validation: Do not accept a negative number for speed and do not 
      * accept any value less than 1 for time traveled.
      */
-    public static void doExercise3() {
+    public static void doExercise3() throws FileNotFoundException {
         // TODO: Complete Exercise 2 & 3 Below
+        Scanner sc = new Scanner(System.in);
+        PrintWriter printer = new PrintWriter("ex3output.txt");
+
+        int speedOfVehicle, noOfHourTravel, distance, i;
+        System.out.println("Enter Speed of a Vehicle (in miles-per-hour):");
+        speedOfVehicle = sc.nextInt();
+        System.out.println("Enter the number of hours it has traveled:");
+        noOfHourTravel = sc.nextInt();
+
+        if (speedOfVehicle < 0) {
+            System.out.println("Please enter valid Speed..");
+        } else if (noOfHourTravel < 1) {
+            System.out.println("Please enter hour greater than 1.");
+        } else {
+            System.out.println("Hour    Distance Traveled");
+            System.out.println("-------------------------");
+
+            printer.println("Hour    Distance Traveled");
+            printer.println("-------------------------");
+            for (i = 1; i <= noOfHourTravel; i++) {
+                distance = speedOfVehicle * i;
+                System.out.println(" " + i + "               " + distance);
+                printer.println(" " + i + "               " + distance);
+            }
+        }
+        printer.close();
 
     }
 
@@ -162,6 +203,25 @@ public class CPD3314Assign4 {
      */
     public static void doExercise10() {
         // TODO: Complete Exercise 10 Below
+        int i, number, min, max = 0, temp=0;
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println("Enter an integer (-99 to quit):");
+            number = sc.nextInt();
+
+            min = number;
+
+            if (max > number) {
+                max = number;
+            }
+            if(min>=temp)
+            {
+                min=temp;
+            }
+            temp = number;
+        } while (number != -99);
+        System.out.println("Smallest number is " + min + ".");
+        System.out.println("Largest number is " + max + ".");
 
     }
 
@@ -249,6 +309,6 @@ public class CPD3314Assign4 {
      */
     public static void doExercise18() {
         // TODO: Complete Exercise 17 & 18 Below
-        
+
     }
 }
