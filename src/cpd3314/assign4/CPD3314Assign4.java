@@ -21,10 +21,12 @@
  */
 package cpd3314.assign4;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -203,23 +205,22 @@ public class CPD3314Assign4 {
      */
     public static void doExercise10() {
         // TODO: Complete Exercise 10 Below
-        int i, number, min, max = 0, temp=0;
+        int i, number, min = 2147483647, max = 0;
         Scanner sc = new Scanner(System.in);
-        do {
-            System.out.println("Enter an integer (-99 to quit):");
-            number = sc.nextInt();
-
-            min = number;
-
-            if (max > number) {
+        System.out.println("Enter an integer (-99 to quit):");
+        number = sc.nextInt();
+        min = number;
+        while (number != -99) {
+            if (number < min) {
+                min = number;
+            }
+            if (number > max) {
                 max = number;
             }
-            if(min>=temp)
-            {
-                min=temp;
-            }
-            temp = number;
-        } while (number != -99);
+
+            System.out.println("Enter an integer (-99 to quit):");
+            number = sc.nextInt();
+        }
         System.out.println("Smallest number is " + min + ".");
         System.out.println("Largest number is " + max + ".");
 
@@ -252,6 +253,15 @@ public class CPD3314Assign4 {
      */
     public static void doExercise11() {
         // TODO: Complete Exercise 11 Below
+        double celsius, fahrenheit;
+        System.out.println("C        F");
+        System.out.println("-------------");
+        for (int i = 0; i <= 100; i++) {
+            celsius = i;
+            fahrenheit = (9.0 / 5.0) * celsius + 32;
+            System.out.printf("%.1f      %.1f\n", celsius, fahrenheit);
+
+        }
 
     }
 
@@ -272,8 +282,29 @@ public class CPD3314Assign4 {
      *   3: But you shall shine more bright in these contents
      *   ...
      */
-    public static void doExercise14() {
+    public static void doExercise14() throws IOException {
         // TODO: Complete Exercise 14 Below
+        String fileName = new String();
+        String content = new String();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("What file do you want to read?");
+        fileName = sc.nextLine();
+
+        //open the file..
+        File file = new File(fileName);
+        Scanner reader = new Scanner(file);
+
+        // read from file until end of file.
+        int i = 1;
+        while (reader.hasNext()) {
+            //read the next line..
+            content = reader.nextLine();
+
+            // output the contents of file.
+            System.out.println(i + ": " + content);
+            i++;
+
+        }
 
     }
 
@@ -309,6 +340,28 @@ public class CPD3314Assign4 {
      */
     public static void doExercise18() {
         // TODO: Complete Exercise 17 & 18 Below
+        int guessNumber, randomNumber,i=1;
+        Scanner sc = new Scanner(System.in);
+        Random rn = new Random();
+        randomNumber = rn.nextInt(50)+1;
+        System.out.println("Guess my number (1-50):");
+        guessNumber = sc.nextInt();
+        //System.out.println("Your random number is "+randomNumber);
+        while (randomNumber != guessNumber) {
+            if(guessNumber < randomNumber)
+            {
+                System.out.println("Too low, try again.");
+            }
+            else if(guessNumber > randomNumber)
+            {
+                System.out.println("Too high, try again.");
+            }
+            
+            System.out.println("Guess my number (1-50):");
+            guessNumber = sc.nextInt();
+            i++;
+        }
+        System.out.println("Correct! That took "+i+" attempts.");
 
     }
 }
